@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('konsentrasi', function(Blueprint $table) {
-            $table->integer('konsentrasi_id')->primary();
-            $table->string('konsentrasi_konsentrasi_ID', 255)->nullable(false);
-            $table->string('konsentrasi_konsentrasi_EN', 255)->nullable(false);
+        Schema::create('jabatan', function(Blueprint $table) {
+            $table->integer('jabatan_id')->primary();
+            $table->string('jabatan_jabatan_ID')->nullable(false);
+            $table->string('jabatan_jabatan_EN')->nullable(false);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('konsentrasi');
+        Schema::drop('jabatan');
     }
 };

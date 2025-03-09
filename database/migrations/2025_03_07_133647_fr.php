@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('fr', function(Blueprint $table) {
             $table->integer('fr_id')->primary();
-            $table->string('fr_riset', 255)->nullable(false);
+            $table->string('fr_fr_ID', 255)->nullable(false);
+            $table->string('fr_fr_EN', 255)->nullable(false);
             $table->timestamps();
         });
     }

@@ -1,6 +1,5 @@
 <div class="row m-0 p-0 py-5">
     <div class="col-md-6 col-lg-4 col-xl-3 row m-0 p-0 pe-2">
-        <h3 class="text-center mb-4 fw-light">Program Studi Ilmu Politik dalam Angka</h3>
         <div class="col-6 m-0 p-0 pe-1">
             <div class="card mb-2 border-clr1 text-clr1 bg-transparent m-0 p-3 d-flex justify-content-center align-items-center square">
                 <div class="">

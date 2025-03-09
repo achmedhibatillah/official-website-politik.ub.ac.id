@@ -36,8 +36,8 @@
 .border-clr4 { border: 1px solid var(--clr4); }
 .border-clr5 { border: 1px solid var(--clr5); }
 
-.btn-clr1 { background-color: var(--clr1); color: var(--clr3); }
-.btn-clr1:hover { background-color: var(--clr1); color: var(--clr3); filter: brightness(90%); }
+.btn-clr1 { background-color: var(--clr1); color: var(--clr4); }
+.btn-clr1:hover { background-color: var(--clr1); color: var(--clr4); filter: brightness(90%); }
 .btn-clr5 { background-color: var(--clr5); color: var(--clr3); }
 .btn-clr5:hover { background-color: var(--clr5); color: var(--clr3); filter: brightness(90%); }
 .btn-outline-clr1 { background-color: transparent; color: var(--clr1); border: 1px solid var(--clr1); }
@@ -127,3 +127,9 @@ input[type="number"] { -moz-appearance: textfield; }
 }
 
 .hide-text-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.cke_notifications_area { display: none; }
+
+.lang-id, .lang-en { font-size: 0.7rem; font-family: monospace; font-style: normal; display: inline; padding: 0 3px; border-radius: 5px; background: gray; color: white; text-align: center; } .lang-id::before { content: "ID"; } .lang-en::before { content: "EN"; }
+
+
