@@ -27,9 +27,7 @@ class KurikulumController extends Controller
             $request->file('kurikulum_silabus')->move(public_path('assets/uploads/silabus'), $filename);
             $originalname = $request->file('kurikulum_silabus')->getClientOriginalName();
             session()->flash('kurikulum_silabus_original', $originalname);
-        }
-
-        if ($request->kurikulum_session) {
+        } elseif ($request->kurikulum_session) {
             session()->flash('kurikulum_silabus_original', $request->kurikulum_session);
         }
         
@@ -119,9 +117,7 @@ class KurikulumController extends Controller
             $request->file('kurikulum_silabus')->move(public_path('assets/uploads/silabus'), $filename);
             $originalname = $request->file('kurikulum_silabus')->getClientOriginalName();
             session()->flash('kurikulum_silabus_original', $originalname);
-        }
-
-        if ($request->kurikulum_session) {
+        } elseif ($request->kurikulum_session) {
             session()->flash('kurikulum_silabus_original', $request->kurikulum_session);
         }
         

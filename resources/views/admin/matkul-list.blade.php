@@ -15,7 +15,7 @@
         <tr>
             <td>{{ $i }}</td>
             <td>{{ $x->mk_id }}</td>
-            <td><p class="m-0">{{ $x->mk_mk_ID }}</p><p class="m-0 fsz-10 text-secondary">{{ $x->mk_mk_EN }}</p></td>
+            <td><a class="m-0 td-none fw-bold" href="{{ url('admin-mata-kuliah/' . $x->mk_id) }}">{{ $x->mk_mk_ID }}</a><p class="m-0 fsz-10 text-secondary">{{ $x->mk_mk_EN }}</p></td>
             <td class="text-center">{{ $x->mk_sks }}</td>
             <td class="text-center">{{ $x->mk_semester }}</td>
             <td class="text-end">

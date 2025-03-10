@@ -16,10 +16,10 @@ class KonsentrasiSeeder extends Seeder
         DB::table('konsentrasi')->delete();
 
         DB::table('konsentrasi')->insert([
-            ['konsentrasi_id' => 10000000, 'konsentrasi_konsentrasi' => 'Tidak Ada'],
-            ['konsentrasi_id' => 20000001, 'konsentrasi_konsentrasi' => 'Politik Indonesia'],
-            ['konsentrasi_id' => 20000002, 'konsentrasi_konsentrasi' => 'Demokrasi dan Politik Elektoral'],
-            ['konsentrasi_id' => 20000003, 'konsentrasi_konsentrasi' => 'Kewirausahaan Politik dan Kebijakan'],
+            ['konsentrasi_id' => 10000000, 'konsentrasi_konsentrasi_ID' => 'Tidak Ada', 'konsentrasi_konsentrasi_EN' => 'Nothing'],
+            ['konsentrasi_id' => 20000001, 'konsentrasi_konsentrasi_ID' => 'Politik Indonesia', 'konsentrasi_konsentrasi_EN' => 'Indonesian Politics'],
+            ['konsentrasi_id' => 20000002, 'konsentrasi_konsentrasi_ID' => 'Demokrasi dan Politik Elektoral', 'konsentrasi_konsentrasi_EN' => 'Democracy and Electoral Politics'],
+            ['konsentrasi_id' => 20000003, 'konsentrasi_konsentrasi_ID' => 'Kewirausahaan Politik dan Kebijakan', 'konsentrasi_konsentrasi_EN' => 'Political Entrepreneurship and Policy'],
         ]);
     }
 }

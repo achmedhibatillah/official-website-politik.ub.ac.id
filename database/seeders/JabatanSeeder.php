@@ -16,10 +16,10 @@ class JabatanSeeder extends Seeder
         DB::table('jabatan')->delete();
 
         DB::table('jabatan')->insert([
-            ['jabatan_id' => 10000000, 'jabatan_jabatan' => 'Tidak Ada'],
-            ['jabatan_id' => 20000001, 'jabatan_jabatan' => 'Dekan'],
-            ['jabatan_id' => 20000002, 'jabatan_jabatan' => 'Wakil Dekan'],
-            ['jabatan_id' => 20000003, 'jabatan_jabatan' => 'Ketua Program Studi'],
+            ['jabatan_id' => 10000000, 'jabatan_jabatan_ID' => 'Tidak Ada', 'jabatan_jabatan_EN' => 'Nothing'],
+            ['jabatan_id' => 20000001, 'jabatan_jabatan_ID' => 'Dekan', 'jabatan_jabatan_EN' => 'Dean'],
+            ['jabatan_id' => 20000002, 'jabatan_jabatan_ID' => 'Wakil Dekan', 'jabatan_jabatan_EN' => 'Vice Dean'],
+            ['jabatan_id' => 20000003, 'jabatan_jabatan_ID' => 'Ketua Program Studi', 'jabatan_jabatan_EN' => 'Head of Study Program'],
         ]);
     }
 }

@@ -17,6 +17,9 @@ class FokusRiset extends Model
 
     protected $fillable = [
         'fr_id',
-        'fr_fr',
+        'fr_fr_ID',
+        'fr_fr_EN',
+        'fr_deskripsi_ID',
+        'fr_deskripsi_EN',
     ];
 }

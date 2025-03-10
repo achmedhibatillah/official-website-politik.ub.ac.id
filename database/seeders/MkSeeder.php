@@ -12,10 +12,6 @@ class MkSeeder extends Seeder
      */
     public function run(): void
     {
-        // Hapus semua data sebelum mengisi ulang (opsional)
-        DB::table('mk')->truncate();
-
-        // Insert data baru
         DB::table('mk')->insert([
             [
                 'mk_id' => 'FIS20800',

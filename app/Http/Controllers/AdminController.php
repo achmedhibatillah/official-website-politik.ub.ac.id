@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Dosen;
 use App\Models\FokusRiset;
-use App\Models\Jabatan;
-use App\Models\Konsentrasi;
 use App\Models\Kurikulum;
 use App\Models\MataKuliah;
+use App\Models\TenagaPendidik;
 
 class AdminController extends Controller
 {
@@ -151,6 +150,7 @@ class AdminController extends Controller
     public function matkul_detail($mk_id)
     {
         $mkData = MataKuliah::getDetailMk($mk_id);
+        $dosenData = Dosen::get();
 
         $page = [
             [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
@@ -168,6 +168,7 @@ class AdminController extends Controller
         view('templates/sidebar-admin', $data) . 
         view('admin/matkul-detail', [
             'mk' => $mkData,
+            'dosen' => $dosenData,
         ]) . 
         view('templates/footbar-admin') .
         view('templates/footer');
@@ -198,6 +199,35 @@ class AdminController extends Controller
         view('templates/footer');
     }
 
+    public function matkul_edit($mk_id)
+    {
+        $mkData = MataKuliah::getDetailSelectedMk($mk_id);
+
+        $page = [
+            [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
+            [ 'name' => $mkData->mk_mk_ID . ' (' . $mkData->mk_id . ')', 'url' => url('admin-mata-kuliah/' . $mkData->mk_id) ],
+            [ 'name' => 'Edit', 'url' => url('admin-edit-matkul/' . $mkData->mk_id) ],        
+        ];
+
+        $data = [
+            'title' => 'Edit Mata Kuliah',
+            'status' => 'mata-kuliah',
+            'page' => $page,
+        ];
+
+        $kurikulumData = Kurikulum::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/matkul-edit', [
+            'mk' => $mkData,
+            'kurikulum' => $kurikulumData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
     public function dosen()
     {
         $page = [
@@ -210,20 +240,311 @@ class AdminController extends Controller
             'page' => $page,
         ];
 
-        $dosenData = Dosen::getAllDosen();
-        $fokusRisetData = FokusRiset::get();
-        $jabatan = Jabatan::get();
-        $konsentrasi = Konsentrasi::get();
+        $dosenData = Dosen::orderBy('dosen_nama', 'asc')->get();
 
         return
         view('templates/header', $data) . 
         view('templates/sidebar-admin', $data) . 
         view('admin/dosen', [
             'dosen' => $dosenData,
-            'fr' => $fokusRisetData,
-            'jabatan' => $jabatan,
-            'konsentrasi' => $konsentrasi,
         ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_detail($dosen_id)
+    {
+        $dosenData = Dosen::getDetailDosen($dosen_id);
+
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => $dosenData->dosen_nama, 'url' => url('admin-dosen/' . $dosenData->dosen_id) ],
+        ];
+
+        $data = [
+            'title' => 'Data Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-detail', [
+            'dosen' => $dosenData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_tambah()
+    {
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-dosen') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Data Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::get();
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-tambah', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_tambah_step2($dosen_id)
+    {
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-dosen') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Data Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-tambah-step2', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_tambah_step3($dosen_id)
+    {
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-dosen') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Data Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-tambah-step3', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_edit($dosen_id)
+    {
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => $dosenData->dosen_nama, 'url' => url('admin-dosen/' . $dosenData->dosen_id) ],
+            [ 'name' => 'Edit', 'url' => url('admin-edit-dosen/' . $dosenData->dosen_id) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Data Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-edit', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_edit_profil_akademik($dosen_id)
+    {
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => $dosenData->dosen_nama, 'url' => url('admin-dosen/' . $dosenData->dosen_id) ],
+            [ 'name' => 'Edit Profil Akademik', 'url' => url('admin-edit-profil-akademik-dosen/' . $dosenData->dosen_id) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Profil Akademik Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-edit-step2', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_edit_fokus_riset($dosen_id)
+    {
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => $dosenData->dosen_nama, 'url' => url('admin-dosen/' . $dosenData->dosen_id) ],
+            [ 'name' => 'Edit Fokus Riset', 'url' => url('admin-edit-fokus-riset-dosen/' . $dosenData->dosen_id) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Fokus Riset Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::getDetailSelectedDosen($dosen_id);
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-edit-step3', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_atur_mata_kuliah($dosen_id)
+    {
+        $dosenData = Dosen::where('dosen_id', $dosen_id)->first();
+
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => $dosenData->dosen_nama, 'url' => url('admin-dosen/' . $dosenData->dosen_id) ],
+            [ 'name' => 'Atur Mata Kuliah', 'url' => url('admin-atur-mata-kuliah-dosen/' . $dosenData->dosen_id) ],
+        ];
+
+        $data = [
+            'title' => 'Atur Mata Kuliah',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::getDetailSelectedDosen($dosen_id);
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-edit-matkul', [
+            'dosen' => $dosenData,
+            'fr' => $frData
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function dosen_fokus_riset()
+    {
+        $page = [
+            [ 'name' => 'Data Dosen', 'url' => url('admin-dosen') ],
+            [ 'name' => 'Fokus Riset', 'url' => url('admin-fokus-riset') ],
+        ];
+
+        $data = [
+            'title' => 'Fokus Riset Dosen',
+            'status' => 'dosen',
+            'page' => $page,
+        ];
+
+        $dosenData = Dosen::get();
+        $frData = FokusRiset::get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/dosen-fr', [
+            'dosen' => $dosenData,
+            'fr' => $frData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+    
+    public function tendik()
+    {
+        $page = [
+            [ 'name' => 'Data Tenaga Pendidik', 'url' => url('admin-tenaga-pendidik') ],
+        ];
+
+        $data = [
+            'title' => 'Data Tenaga Pendidik',
+            'status' => 'tenaga-pendidik',
+            'page' => $page,
+        ];
+
+        $tendikData = TenagaPendidik::orderBy('tendik_nama', 'asc')->get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/tendik', [
+            'tendik' => $tendikData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function tendik_tambah()
+    {
+        $page = [
+            [ 'name' => 'Data Tenaga Pendidik', 'url' => url('admin-tenaga-pendidik') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-tendik') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Tenaga Pendidik',
+            'status' => 'tenaga-pendidik',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/tendik-tambah') . 
         view('templates/footbar-admin') .
         view('templates/footer');
     }

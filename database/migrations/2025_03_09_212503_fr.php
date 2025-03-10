@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('konsentrasi', function(Blueprint $table) {
-            $table->integer('konsentrasi_id')->primary();
-            $table->string('konsentrasi_konsentrasi_ID', 255)->nullable(false);
-            $table->string('konsentrasi_konsentrasi_EN', 255)->nullable(false);
+        Schema::create('fr', function(Blueprint $table) {
+            $table->integer('fr_id')->primary();
+            $table->string('fr_fr_ID', 255)->nullable(false);
+            $table->string('fr_fr_EN', 255)->nullable(false);
+            $table->text('fr_deskripsi_ID');
+            $table->text('fr_deskripsi_EN');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('konsentrasi');
+        Schema::drop('fr');
     }
 };

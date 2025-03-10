@@ -43,7 +43,7 @@
 .btn-outline-clr1 { background-color: transparent; color: var(--clr1); border: 1px solid var(--clr1); }
 .btn-outline-clr1:hover { background-color: var(--clr1); color: white; }
 .btn-outline-clr3 { background-color: transparent; color: var(--clr3); border: 1px solid var(--clr3); }
-.btn-outline-clr3:hover { background-color: var(--clr4); color: var(--clr3); }
+.btn-outline-clr3:hover { background-color: var(--clr3); color: var(--clr4); }
 .btn-outline-clr4 { background-color: transparent; color: var(--clr4); border: 1px solid var(--clr4); }
 .btn-outline-clr4:hover { background-color: var(--clr4); color: var(--clr3); }
 .btn-outline-clr5 { background-color: transparent; color: var(--clr5); border: 1px solid var(--clr5); }
@@ -79,6 +79,8 @@
 .fw-800 { font-weight:800; }
 .fw-900 { font-weight:900; }
 
+.shadow-m-2 { box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); }
+.shadow-l-2 { box-shadow: 0 0 2px rgba(0, 0, 0, 0.7); }
 .shadow-m { box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
 .shadow-l { box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); }
 
@@ -89,6 +91,8 @@
 .cursor-pointer { cursor: pointer; }
 .img-death { pointer-events: none; -webkit-user-drag: none; }
 .td-none { text-decoration: none !important; }
+.td-hover { text-decoration: none; }
+.td-hover:hover { text-decoration: underline; }
 .no-select { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: default; }
 .square { aspect-ratio:1/1; }
 .text-justify { text-align: justify; }
