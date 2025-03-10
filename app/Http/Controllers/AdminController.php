@@ -9,6 +9,7 @@ use App\Models\FokusRiset;
 use App\Models\Kurikulum;
 use App\Models\MataKuliah;
 use App\Models\TenagaPendidik;
+use App\Models\Berita;
 
 class AdminController extends Controller
 {
@@ -545,6 +546,126 @@ class AdminController extends Controller
         view('templates/header', $data) . 
         view('templates/sidebar-admin', $data) . 
         view('admin/tendik-tambah') . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function tendik_edit($tendik_id)
+    {
+        $tendikData = TenagaPendidik::where('tendik_id', $tendik_id)->first();
+        $page = [
+            [ 'name' => 'Data Tenaga Pendidik', 'url' => url('admin-tenaga-pendidik') ],
+            [ 'name' => 'Edit (' . $tendikData->tendik_nama . ')', 'url' => url('admin-edit-tendik/' . $tendikData->tendik_id) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Tenaga Pendidik',
+            'status' => 'tenaga-pendidik',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/tendik-edit', [
+            'tendik' => $tendikData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function berita()
+    {
+        $page = [
+            [ 'name' => 'Berita', 'url' => url('admin-berita') ],
+        ];
+
+        $data = [
+            'title' => 'Berita',
+            'status' => 'berita',
+            'page' => $page,
+        ];
+
+        $beritaData = Berita::orderBy('created_at', 'desc')->get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/berita', [
+            'berita' => $beritaData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function berita_tambah()
+    {
+        $page = [
+            [ 'name' => 'Berita', 'url' => url('admin-berita') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-berita') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Berita',
+            'status' => 'berita',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/berita-tambah') . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function berita_detail($berita_id)
+    {
+        $beritaData = Berita::where('berita_id', $berita_id)->first();
+
+        $page = [
+            [ 'name' => 'Berita', 'url' => url('admin-berita') ],
+            [ 'name' => $beritaData->berita_judul_ID, 'url' => url('admin-berita/' . $beritaData->berita_judul_ID) ],
+        ];
+
+        $data = [
+            'title' => 'Detail Berita',
+            'status' => 'berita',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/berita-detail', [
+            'berita' => $beritaData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function berita_edit($berita_id)
+    {
+        $beritaData = Berita::where('berita_id', $berita_id)->first();
+
+        $page = [
+            [ 'name' => 'Berita', 'url' => url('admin-berita') ],
+            [ 'name' => $beritaData->berita_judul_ID, 'url' => url('admin-berita/' . $beritaData->berita_id) ],
+            [ 'name' => 'Edit', 'url' => url('admin-edit-berita/' . $beritaData->berita_judul_ID) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Berita',
+            'status' => 'berita',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/berita-edit', [
+            'berita' => $beritaData,
+        ]) . 
         view('templates/footbar-admin') .
         view('templates/footer');
     }

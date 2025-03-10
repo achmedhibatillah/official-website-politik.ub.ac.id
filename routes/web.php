@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LogicController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\TenagaPendidikController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('s', function() { return response()->json(session()->all()); });
@@ -56,3 +58,17 @@ Route::get('admin-hapus-dosen/{slug}', [DosenController::class, 'delete']);
 
 Route::get('admin-tenaga-pendidik', [AdminController::class, 'tendik']);
 Route::get('admin-tambah-tendik', [AdminController::class, 'tendik_tambah']);
+Route::post('admin-simpan-tendik', [TenagaPendidikController::class, 'add']);
+Route::get('admin-edit-tendik/{slug}', [AdminController::class, 'tendik_edit']);
+Route::post('admin-update-tendik', [TenagaPendidikController::class, 'update']);
+Route::get('admin-hapus-tendik/{slug}', [TenagaPendidikController::class, 'delete']);
+
+Route::get('admin-berita', [AdminController::class, 'berita']); 
+Route::get('admin-tambah-berita', [AdminController::class, 'berita_tambah']); 
+Route::post('admin-simpan-berita', [BeritaController::class, 'add']); 
+Route::get('admin-activate-berita/{slug}', [BeritaController::class, 'activate']); 
+Route::get('admin-deactivate-berita/{slug}', [BeritaController::class, 'deactivate']); 
+Route::get('admin-berita/{slug}', [AdminController::class, 'berita_detail']); 
+Route::get('admin-edit-berita/{slug}', [AdminController::class, 'berita_edit']); 
+Route::post('admin-update-berita', [BeritaController::class, 'update']);
+Route::get('admin-hapus-berita/{slug}', [BeritaController::class, 'delete']); 
