@@ -15,6 +15,8 @@
     --clr3: #17191C;
     --clr4: #E6E0D4;
     --clr5: #fffad5;
+
+    --clrsec: #d7d7d7;
 }
 
 .text-clr1 { color: var(--clr1); } 
@@ -28,6 +30,8 @@
 .bg-clr3 { background-color: var(--clr3); }
 .bg-clr4 { background-color: var(--clr4); }
 .bg-clr5 { background-color: var(--clr5); }
+
+.bg-clrsec { background-color: var(--clrsec); }
 
 .border-none { border: none !important; }
 .border-clr1 { border: 1px solid var(--clr1); }
@@ -96,6 +100,7 @@
 .no-select { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; cursor: default; }
 .square { aspect-ratio:1/1; }
 .text-justify { text-align: justify; }
+.img-cover { height: 100%; width: 100%; object-fit: cover; }
 
 .translate-center { transform: translate(-50%, -50%); } .translate-right { transform: translate(50%, 0); } .translate-right-top { transform: translate(50%, -50%); } .translate-right-bottom { transform: translate(50%, 50%); } .translate-left { transform: translate(-50%, 0); } .translate-left-top { transform: translate(-50%, -50%); } .translate-left-bottom { transform: translate(-50%, 50%); }
 
@@ -132,8 +137,12 @@ input[type="number"] { -moz-appearance: textfield; }
 
 .hide-text-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
+.hover:hover { filter: brightness(95%); }
+
 .cke_notifications_area { display: none; }
 
+/* CONTENT */
 .lang-id, .lang-en { font-size: 0.7rem; font-family: monospace; font-style: normal; display: inline; padding: 0 3px; border-radius: 5px; background: gray; color: white; text-align: center; } .lang-id::before { content: "ID"; } .lang-en::before { content: "EN"; }
 .lang-id-sm, .lang-en-sm { font-size: 0.5rem; font-family: monospace; font-style: normal; display: inline; padding: 0 2px; border-radius: 3px; background: gray; color: white; text-align: center; } .lang-id-sm::before { content: "ID"; } .lang-en-sm::before { content: "EN"; }
 
+.berita-box { border-top: 1px solid var(--clrsec) }

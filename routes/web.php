@@ -1,23 +1,37 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LogicController;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BeritaHomeController;
+
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\TenagaPendidikController;
 
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Auth\Middleware\Authenticate;
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('s', function() { return response()->json(session()->all()); });
 Route::get('d', [LogicController::class, 'd']);
 
+Route::get('login-admin', [AuthenticationController::class, 'index']);
+
+// GUEST
+Route::get('berita', [BeritaHomeController::class, 'index']);
+Route::get('berita/{slug}', [BeritaHomeController::class, 'detail']);
+
 // ADMIN
 Route::get('admin', function() { return redirect()->to('dashboard-admin'); });
-Route::get('dashboard-admin', [AdminController::class, 'index']);
+Route::get('dashboard-admin', [AdminController::class, 'index'])->middleware(AdminMiddleware::class);
 
 Route::get('admin-kurikulum', [AdminController::class, 'kurikulum']);
 Route::get('admin-tambah-kurikulum', [AdminController::class, 'kurikulum_tambah']);
@@ -72,3 +86,13 @@ Route::get('admin-berita/{slug}', [AdminController::class, 'berita_detail']);
 Route::get('admin-edit-berita/{slug}', [AdminController::class, 'berita_edit']); 
 Route::post('admin-update-berita', [BeritaController::class, 'update']);
 Route::get('admin-hapus-berita/{slug}', [BeritaController::class, 'delete']); 
+
+Route::get('admin-pengumuman', [AdminController::class, 'pengumuman']); 
+Route::get('admin-tambah-pengumuman', [AdminController::class, 'pengumuman_tambah']); 
+Route::post('admin-simpan-pengumuman', [PengumumanController::class, 'add']); 
+Route::get('admin-activate-pengumuman/{slug}', [PengumumanController::class, 'activate']); 
+Route::get('admin-deactivate-pengumuman/{slug}', [PengumumanController::class, 'deactivate']); 
+Route::get('admin-pengumuman/{slug}', [AdminController::class, 'pengumuman_detail']); 
+Route::get('admin-edit-pengumuman/{slug}', [AdminController::class, 'pengumuman_edit']); 
+Route::post('admin-update-pengumuman', [PengumumanController::class, 'update']);
+Route::get('admin-hapus-pengumuman/{slug}', [PengumumanController::class, 'delete']); 

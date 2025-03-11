@@ -1,6 +1,6 @@
 <div class="row m-0 p-0 w-100 py-5">
     <div class="col-md-4 m-0 p-0 d-flex justify-content-center align-items-center">
-        <div class="position-relative">
+        <div class="position-relative text-clr1">
             <h5 class="text-center fw-light">Jargon Ilmu Politik</h5>
             <hr>
             <div class="d-flex">

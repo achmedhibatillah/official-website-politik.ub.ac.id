@@ -10,6 +10,7 @@ use App\Models\Kurikulum;
 use App\Models\MataKuliah;
 use App\Models\TenagaPendidik;
 use App\Models\Berita;
+use App\Models\Pengumuman;
 
 class AdminController extends Controller
 {
@@ -665,6 +666,102 @@ class AdminController extends Controller
         view('templates/sidebar-admin', $data) . 
         view('admin/berita-edit', [
             'berita' => $beritaData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function pengumuman()
+    {
+        $page = [
+            [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
+        ];
+
+        $data = [
+            'title' => 'Pengumuman',
+            'status' => 'pengumuman',
+            'page' => $page,
+        ];
+
+        $pengumumanData = Pengumuman::orderBy('created_at', 'desc')->get();
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/pengumuman', [
+            'pengumuman' => $pengumumanData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function pengumuman_tambah()
+    {
+        $page = [
+            [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
+            [ 'name' => 'Tambah', 'url' => url('admin-tambah-pengumuman') ],
+        ];
+
+        $data = [
+            'title' => 'Tambah Pengumuman',
+            'status' => 'pengumuman',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/pengumuman-tambah') . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function pengumuman_detail($pengumuman_id)
+    {
+        $pengumumanData = Pengumuman::where('pengumuman_id', $pengumuman_id)->first();
+
+        $page = [
+            [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
+            [ 'name' => $pengumumanData->pengumuman_judul_ID, 'url' => url('admin-pengumuman/' . $pengumumanData->pengumuman_judul_ID) ],
+        ];
+
+        $data = [
+            'title' => 'Detail Pengumuman',
+            'status' => 'pengumuman',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/pengumuman-detail', [
+            'pengumuman' => $pengumumanData,
+        ]) . 
+        view('templates/footbar-admin') .
+        view('templates/footer');
+    }
+
+    public function pengumuman_edit($pengumuman_id)
+    {
+        $pengumumanData = Pengumuman::where('pengumuman_id', $pengumuman_id)->first();
+
+        $page = [
+            [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
+            [ 'name' => $pengumumanData->pengumuman_judul_ID, 'url' => url('admin-pengumuman/' . $pengumumanData->pengumuman_id) ],
+            [ 'name' => 'Edit', 'url' => url('admin-edit-pengumuman/' . $pengumumanData->pengumuman_judul_ID) ],
+        ];
+
+        $data = [
+            'title' => 'Edit Pengumuman',
+            'status' => 'pengumuman',
+            'page' => $page,
+        ];
+
+        return
+        view('templates/header', $data) . 
+        view('templates/sidebar-admin', $data) . 
+        view('admin/pengumuman-edit', [
+            'pengumuman' => $pengumumanData,
         ]) . 
         view('templates/footbar-admin') .
         view('templates/footer');

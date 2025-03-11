@@ -122,4 +122,19 @@ buttons.forEach(({ btn, content }) => {
     });
 });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const titleInput = document.getElementById("berita_judul_ID");
+    const slugInput = document.getElementById("berita_slug");
+
+    titleInput.addEventListener("input", function () {
+        let slug = titleInput.value
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-");
+
+        slugInput.value = slug;
+    });
+});
 </script>

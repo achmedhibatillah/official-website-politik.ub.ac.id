@@ -8,7 +8,7 @@
                 @foreach($berita as $x)
                     <div class="card mb-2 p-1 border-clr3" id="card-{{ $x->berita_id }}">
                         <div class="d-flex align-items-center">
-                            <div class="d-flex justify-content-center align-items-center overflow-hidden rounded shadow-l-2" style="width:100px;aspect-ratio:3/2;">
+                            <div class="d-flex justify-content-center align-items-center overflow-hidden rounded shadow-l-2 ms-3" style="width:100px;aspect-ratio:3/2;">
                                 <img src="{{ url($x->berita_gambar) }}" style="height:100%;width:100%;object-fit:cover;">
                             </div>
                             <div class="ms-3 m-0 my-2">

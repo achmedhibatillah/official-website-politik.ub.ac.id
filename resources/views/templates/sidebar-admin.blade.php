@@ -70,6 +70,15 @@
                     <div class="d-flex align-items-center ms-auto"><i class="fa-solid fa-toggle-off fsz-12"></i></div>
                     @endif
                 </a>
+                <a href="{{ url('admin-pengumuman') }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2">
+                    <div class="d-flex justify-content-center align-items-center we-18"><i class="fa-solid fa-newspaper"></i></div>
+                    <div class="ms-2 lh-1">Pengumuman</div>
+                    @if($status == 'pengumuman')
+                    <div class="d-flex align-items-center ms-auto"><i class="fa-solid fa-toggle-on fsz-12"></i></div>
+                    @else
+                    <div class="d-flex align-items-center ms-auto"><i class="fa-solid fa-toggle-off fsz-12"></i></div>
+                    @endif
+                </a>
                 <a href="{{ url('admin-menu') }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2">
                     <div class="d-flex justify-content-center align-items-center we-18"><i class="fas fa-wrench"></i></div>
                     <div class="ms-2 lh-1">Atur Menu</div>
