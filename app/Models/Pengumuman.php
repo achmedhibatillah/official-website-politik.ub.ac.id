@@ -25,7 +25,7 @@ class Pengumuman extends Model
         'pengumuman_isi_EN',
         'pengumuman_status',
         'pengumuman_views',
-    ];
+    ]; 
 
     /**
      * Ambil semua pengumuman dengan format sesuai lokal

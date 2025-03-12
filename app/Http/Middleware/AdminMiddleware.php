@@ -10,11 +10,15 @@ class AdminMiddleware
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $adminToken = env('ADMIN_TOKEN');
+
+        if ($request->session()->get('admin_authenticated') !== true) {
+            return redirect('login-admin')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
         return $next($request);
     }
 }

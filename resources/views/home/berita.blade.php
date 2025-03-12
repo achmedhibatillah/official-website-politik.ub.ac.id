@@ -23,7 +23,7 @@
             </div>
         @endforeach
         <div class="mt-5">
-            @include('templates/pagination')
+            @include('templates/pagination', ['xxx' => $berita])
         </div>
     @else
         <p class="m-0 ms-3">{{ __('berita.berita404') }}</p>

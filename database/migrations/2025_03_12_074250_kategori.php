@@ -15,7 +15,11 @@ return new class extends Migration
             $table->integer('kategori_id')->primary();
             $table->string('kategori_judul_ID', 255);
             $table->string('kategori_judul_EN', 255);
-            $table->integer('kategori_status')->default(1);
+            $table->string('kategori_icon', 255);
+            $table->integer('kategori_urutan');
+            $table->integer('kategori_status')->default(1); // 1 = tanpa dropdown, 2 = dgn dropdown
+            $table->string('kategori_slug', 255)->nullable(); // hanya bisa diisi jika kategori_status = 2
+            $table->integer('kategori_show')->nullable(); // 0 = tak ditampilkan, 1 = ditampilkan
             $table->timestamps();
         });
     }

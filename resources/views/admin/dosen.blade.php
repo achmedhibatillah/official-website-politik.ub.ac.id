@@ -3,7 +3,6 @@
         <h3>Daftar Dosen</h3>
         @include('templates/session')
         <a href="{{ url('admin-tambah-dosen') }}" class="btn btn-outline-clr1 btn-sm m-1">Tambah Dosen</a>
-        <a href="{{ url('admin-fokus-riset') }}" class="btn btn-outline-clr1 btn-sm m-1">Fokus Riset Dosen</a>
         @if($dosen->isNotEmpty())
             <div class="row m-0 p-0 mt-3">
                 @foreach($dosen as $x)

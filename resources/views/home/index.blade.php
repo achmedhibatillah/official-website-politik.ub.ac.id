@@ -1,7 +1,7 @@
 <div class="bg-web bg-clr5 text-clr3 pb-5" style="min-height:600px;">
-    <div style="height:125px;"></div>
+    <div style="height:195px;"></div>
     <div class="row m-0 p-0 justify-content-center">
-        <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 row m-0 p-0">
+        <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 row m-0 p-0" style="max-width: 1250px;">
             <div class="col-md-6 m-0 p-0 d-flex align-items-center">
                 <div>
                     <h5 class="m-0 mb-3 text-clr3">Program Studi</h5>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="bg-clr2 mb-5 row justify-content-center position-relative" style="margin:120px 0 0 0;z-index:2;">
-        <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 m-0 p-0 py-3 position-relative">
+        <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 m-0 p-0 py-3 position-relative" style="max-width: 1250px;">
             <div class="position-absolute d-flex" style="top:-30px">
                 <img src="{{ asset('assets/images/static/illustrations/anc.png') }}" class="we-45 img-death position-relative" style="top:-20px">
                 <h5 class="text-clr2">Pengumuman Terbaru</h5>
@@ -57,7 +57,7 @@
 </div>
 
 <div class="row m-0 p-0 justify-content-center">
-    <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 m-0 p-0">
+    <div class="col-11 col-md-10 col-lg-9 col-xl-7 text-clr3 m-0 p-0" style="max-width: 1250px;">
         @include('home/sec-2')
         <hr>
         @include('home/sec-3')

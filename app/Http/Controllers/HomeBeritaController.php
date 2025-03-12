@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Models\Berita;
 
-class BeritaHomeController extends Controller
+class HomeBeritaController extends Controller
 {
     public function index()
     {
         $data = [
-            'title_main' => __('header.title_main.berita'),
+            'title_main' => __('header.title_main.informasi'),
             'title' => __('header.title.berita_prodi'),
-            'status_main' => 'berita',
+            'status_main' => 'informasi',
             'status' => 'berita',
         ];
     
@@ -45,9 +45,9 @@ class BeritaHomeController extends Controller
     {
 
         $data = [
-            'title_main' => __('header.title_main.berita'),
+            'title_main' => __('header.title_main.informasi'),
             'title' => __('header.title.berita_prodi'),
-            'status_main' => 'berita',
+            'status_main' => 'informasi',
             'status' => 'berita',
             'berita_lain' => Berita::getBerita(5),
         ];
