@@ -25,14 +25,17 @@ class Kategori extends Model
         'kategori_slug',
         'kategori_show',
     ];
-
+    
     public function menu()
     {
-        return $this->belongsToMany(Menu::class, 'kategori_to_menu', 'kategori_id', 'menu_id');
+        return $this->belongsToMany(Menu::class, 'kategori_to_menu', 'kategori_id', 'menu_id')
+                    ->orderBy('menu_urutan', 'asc'); // orderBy dipanggil di sini
     }
 
     public static function getDetailKategori($kategori_id)
     {
-        return self::with('menu')->where('kategori_id', $kategori_id)->first();
+        return self::with(['menu' => function ($query) {
+            $query->orderBy('menu_urutan', 'asc'); // Terapkan orderBy dalam with()
+        }])->where('kategori_id', $kategori_id)->first();
     }
 }

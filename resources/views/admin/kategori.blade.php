@@ -11,8 +11,8 @@
         <div class="mt-3 gap-2">        
         @if($menu->menu->isNotEmpty())
             @foreach($menu->menu as $x)
-                @if($x->menu_as == 0 || $x->menu_as == 1)
-                    <a href="{{ ($x->menu_as == 1) ? url('admin-dependen-' . $x->menu_slug) : url('admin-' . $x->menu_slug) }}" class="btn btn-outline-clr3 td-none px-3 text-clr3 mb-1">{{ $x->menu_judul_ID }}</a>
+                @if($x->menu_as == 0 || $x->menu_as == 1 || $x->menu_as == 2)
+                    <a href="{{ ($x->menu_as == 1) ? url('admin-' . $x->menu_slug) : url('admin-' . $x->menu_slug) }}" class="btn btn-outline-clr3 td-none px-3 text-clr3 mb-1">{{ $x->menu_judul_ID }}</a>
                 @endif
             @endforeach
         @else

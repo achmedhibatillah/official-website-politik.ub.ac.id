@@ -3,95 +3,13 @@
     <p class="lh-1 text-secondary">{{ $data->menu_judul_EN }}</p>
     @include('templates/session')
     <hr>
-    <div class="row m-0 p-0">
-        <div class="col-md-6 m-0 p-0 pe-0 pe-md-1">
-            @foreach($data->kategori as $x)
-            <?php $kategori_id = $x->kategori_id; ?>
-                <div class="d-flex">
-                    <p class="lh-1 m-0">Kategori :</p>
-                    <div class="ms-3">
-                        <p class="lh-1 m-0">{{$x->kategori_judul_ID}}</p>
-                        <p class="lh-1 m-0 text-secondary">{{$x->kategori_judul_EN}}</p>
-                    </div>
-                </div>
-            @endforeach
-            <div class="d-flex mt-2">
-                <p class="lh-1 m-0">Url :</p>
-                <div class="ms-3">
-                <div class="border-clr3 px-2 he-20 d-flex align-items-center">
-                    <p class="lh-1 m-0 fsz-11">https://politik.ub.ac.id/{{$data->menu_slug}}</p>
-                </div>
-                <a href="{{ url($data->menu_slug) }}" class="text-clr1 td-hover fsz-10 ms-2" target="_blank">Lihat halaman <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                @if($data->menu_as !== 1)
-                <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditSlug"  class="text-clr1 td-hover fsz-10 ms-2">Edit slug <i class="fas fa-pencil fsz-8 mb-1"></i></a>
-                @endif
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 row m-0 p-0 ps-0 ps-md-1">
-            <div class="">
-                <p class="fsz-10 m-0">Urutan: {{ $data->menu_urutan }}/{{ $data->menu_urutan }}</p>
-                <p class="fsz-8 m-0"><a href="{{ url('admin-urutan-menu/' . $kategori_id) }}" class="td-hover text-clr1">Ubah urutan menu <i class="fas fa-pencil fsz-6"></i></a></p>
-            </div>
-            <div class="">
-                <p class="fsz-10 m-0 mt-2">Tampilan menu dalam navbar : 
-                    @if($data->menu_status == 0) Biasa
-                    @elseif($data->menu_status == 1) Bold
-                    @elseif($data->menu_status == 2) Baru/New
-                    @elseif($data->menu_status == 3) Penting/Urgent
-                    @endif
-                    <i class="fas fa-info-circle text-secondary cursor-pointer" data-bs-toggle="modal" data-bs-target="#modalInfoStatus"></i>
-                </p>
-                <form action="{{ url('admin-update-menu-status') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="menu_id" value="{{ $data->menu_id }}">
-                    <input type="hidden" name="redirect" value="{{ $page }}">
-                    <div class="row m-0 p-0">
-                        <div class="col-8 m-0 p-0 pe-1 d-flex align-items-center">
-                            <select class="form-select form-select-sm border-radius-none py-0 border-clr3" name="menu_status">
-                                <option {{ ($data->menu_status == 0) ? 'selected' : '' }} value="0">Biasa</option>
-                                <option {{ ($data->menu_status == 1) ? 'selected' : '' }} value="1">Bold</option>
-                                <option {{ ($data->menu_status == 2) ? 'selected' : '' }} value="2">Baru/New</option>
-                                <option {{ ($data->menu_status == 3) ? 'selected' : '' }} value="3">Penting/Urgent</option>
-                            </select>
-                        </div>
-                        <div class="col-4 m-0 p-0 d-flex align-items-center">
-                            <button type="submit" class="btn btn-sm btn-outline-clr3 he-24 m-0 fsz-10 d-flex align-items-center">Ubah</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="mt-2 fsz-10">
-                <p class="m-0">
-                    Status: {!! ($data->menu_show == 1) 
-                        ? '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Ditampilkan</span>' 
-                        : '<span class="text-secondary"><i class="fas fa-minus-circle me-1"></i>Disembunyikan</span>' !!}
-                </p>
-                @if($data->menu_show == 1)
-                    <form action="{{ url('admin-update-menu-show') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="menu_id" value="{{ $data->menu_id }}">
-                        <input type="hidden" name="menu_show" value="0">
-                        <input type="hidden" name="redirect" value="{{ $page }}">
-                        <button type="submit" class="btn btn-sm btn-warning fsz-7 lh-1 p-0 p-1 m-0"><i class="fas fa-eye-slash"></i> Sembunyikan sekarang</button>
-                    </form>
-                @else
-                    <form action="{{ url('admin-update-menu-show') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="menu_id" value="{{ $data->menu_id }}">
-                        <input type="hidden" name="menu_show" value="1">
-                        <input type="hidden" name="redirect" value="{{ $page }}">
-                        <button type="submit" class="btn btn-sm btn-success fsz-7 lh-1 p-0 p-1 m-0"><i class="fas fa-eye"></i> Tampilkan sekarang</button>
-                    </form>
-                @endif
-            </div>
-        </div>
-    </div>
+    @include('admin/templates-header')
     <hr>
     <div class="mb-3">
         <form action="{{ url('admin-update-menu-konten') }}" method="post">
             @csrf
             <input type="hidden" name="menu_id" value="{{ $data->menu_id }}">
+            <input type="hidden" name="menu_slug" value="{{ $data->menu_slug }}">
             <input type="hidden" name="redirect" value="{{ $page }}">
             <div class="d-flex mb-2">
                 <div id="btnID" class="bg-clr3 text-clr4 px-3 cursor-pointer">@error('menu_isi_ID') <i class="fa-solid fa-circle-exclamation text-clr1"></i> @enderror Konten <i class="lang-id"></i></div>
@@ -146,32 +64,41 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const btnID = document.getElementById("btnID");
-        const btnEN = document.getElementById("btnEN");
-        const contID = document.getElementById("contID");
-        const contEN = document.getElementById("contEN");
+document.addEventListener("DOMContentLoaded", function () {
+    let fileInput = document.getElementById('menu_gambar');
+    let fileNameDisplay = document.getElementById('file-name-display');
 
-        btnID.addEventListener("click", function () {
-            contID.classList.remove("d-none");
-            contEN.classList.add("d-none");
-
-            btnID.classList.add("bg-clr3", "text-clr4");
-            btnID.classList.remove("border-clr3", "text-clr3");
-
-            btnEN.classList.remove("bg-clr3", "text-clr4");
-            btnEN.classList.add("border-clr3", "text-clr3");
-        });
-
-        btnEN.addEventListener("click", function () {
-            contEN.classList.remove("d-none");
-            contID.classList.add("d-none");
-
-            btnEN.classList.add("bg-clr3", "text-clr4");
-            btnEN.classList.remove("border-clr3", "text-clr3");
-
-            btnID.classList.remove("bg-clr3", "text-clr4");
-            btnID.classList.add("border-clr3", "text-clr3");
-        });
+    fileInput.addEventListener('change', function(event) {
+        let fileName = event.target.files[0] ? event.target.files[0].name : fileNameDisplay.textContent;
+        fileNameDisplay.textContent = fileName;
     });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const btnID = document.getElementById("btnID");
+    const btnEN = document.getElementById("btnEN");
+    const contID = document.getElementById("contID");
+    const contEN = document.getElementById("contEN");
+
+    btnID.addEventListener("click", function () {
+        contID.classList.remove("d-none");
+        contEN.classList.add("d-none");
+
+        btnID.classList.add("bg-clr3", "text-clr4");
+        btnID.classList.remove("border-clr3", "text-clr3");
+
+        btnEN.classList.remove("bg-clr3", "text-clr4");
+        btnEN.classList.add("border-clr3", "text-clr3");
+    });
+
+    btnEN.addEventListener("click", function () {
+        contEN.classList.remove("d-none");
+        contID.classList.add("d-none");
+
+        btnEN.classList.add("bg-clr3", "text-clr4");
+        btnEN.classList.remove("border-clr3", "text-clr3");
+
+        btnID.classList.remove("bg-clr3", "text-clr4");
+        btnID.classList.add("border-clr3", "text-clr3");
+    });
+});
 </script>

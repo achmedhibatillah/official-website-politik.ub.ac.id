@@ -50,15 +50,6 @@
                 </ul>
             </li>
             <li class="nav-item mb-2 mb-lg-0 dropdown">
-                <a class="nav-link py-1 px-2 m-0 text-clr3 d-flex align-items-center gap-1 lh-1 h-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><div class="fsz-7 m-0 p-0"><i class="fas text-clr1 fa-info-circle"></i></div>Percontohan<i class="fas fa-chevron-down fsz-6"></i></a>
-                <ul class="dropdown-menu border-radius-none fsz-10">
-                    <li><a class="dropdown-item" href="{{ url('sejarah') }}">Menu Biasa</a></li>
-                    <li><a class="dropdown-item" href="{{ url('') }}"><p class="m-0 fw-bold">Menu Bold</p></a></li>
-                    <li><a class="dropdown-item" href="{{ url('') }}">Menu Baru<i class="fst-normal border-clr1 rounded fsz-7 px-1 text-clr1 ms-1">Baru</i></a></li>
-                    <li><a class="dropdown-item" href="{{ url('') }}">Menu Penting<i class="fst-normal border-clr1 rounded fsz-7 px-1 text-clr1 ms-1">Penting</i></a></li>
-                </ul>
-            </li>
-            <li class="nav-item mb-2 mb-lg-0 dropdown">
                 <a class="nav-link py-1 px-2 m-0 text-clr3 d-flex align-items-center gap-1 lh-1 h-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><div class="fsz-7 m-0 p-0"><i class="fas text-clr1 fa-user-tie"></i></div>Kemahasiswaan & Alumni<i class="fas fa-chevron-down fsz-6"></i></a>
                 <ul class="dropdown-menu border-radius-none fsz-10">
                     <li><a class="dropdown-item" href="{{ url('sejarah') }}">Sejarah</a></li>

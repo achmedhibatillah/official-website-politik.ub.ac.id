@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fileNameDisplay.textContent = fileName;
     });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
 const buttons = [
     { btn: "btnBeritaHeader", content: "BeritaHeader" },

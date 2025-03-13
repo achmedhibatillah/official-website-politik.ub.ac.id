@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ url('admin-dashboard') }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2 he-42">
+                <a href="{{ url('admin-dashboard') }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2 he-32">
                     <div class="d-flex justify-content-center align-items-center we-18"><i class="fas fa-dashboard fsz-10"></i></div>
                     <div class="d-flex align-items-center ms-2 lh-1 fsz-10">Dashboard</div>
                     @if($status == '0')
@@ -35,7 +35,7 @@
                     @endif
                 </a>
                 @foreach($side as $x)
-                    <a href="{{ url('admin-kategori-' . $x->kategori_slug) }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2 he-42">
+                    <a href="{{ url('admin-kategori-' . $x->kategori_slug) }}" class="d-flex btn btn-sm btn-outline-clr4 text-start w-100 mb-2 he-32">
                         <div class="d-flex justify-content-center align-items-center we-18">{!! $x->kategori_icon !!}</div>
                         <div class="d-flex align-items-center ms-2 lh-1 fsz-10">{{ $x->kategori_judul_ID }}</div>
                         @if($status == $x->kategori_slug)

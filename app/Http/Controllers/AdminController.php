@@ -38,8 +38,8 @@ class AdminController extends Controller
     {
         $kategoriData = Kategori::where('kategori_slug', $kategori_slug)->first();
         $kategoriData = Kategori::getDetailKategori($kategoriData->kategori_id);
-        $sideData = Kategori::get();
         $menuData = Kategori::getDetailKategori($kategoriData->kategori_id);
+        $sideData = Kategori::get();
 
         $data = [
             'title' => $kategoriData->kategori_judul_ID,
@@ -59,7 +59,7 @@ class AdminController extends Controller
         ]) . 
         view('templates/footbar-admin') .
         view('templates/footer');
-    }
+    } 
 
     public function update_menu($menu_slug)
     {
@@ -68,7 +68,7 @@ class AdminController extends Controller
         $menuData = $menuModel->getDetailMenu($menuData->menu_id);
         $kategori_slug = $menuData->kategori[0]->kategori_slug;
         $sideData = Kategori::get();
-
+ 
         $data = [
             'title' => $menuData->menu_judul_ID,
             'status' => $kategori_slug,
@@ -92,11 +92,11 @@ class AdminController extends Controller
 
     public function kurikulum($kurikulum_id = '')
     {
-        if ($kurikulum_id !== '') {
+        if ($kurikulum_id !== '') { 
             $kurikulumData = Kurikulum::where('kurikulum_id', $kurikulum_id)->first();
             $view = 'admin/kurikulum-detail';
             $page = [ 
-                [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+                [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
                 [ 'name' => 'Kurikulum', 'url' => url('admin-kurikulum') ], 
                 [ 'name' => $kurikulumData->kurikulum_judul_ID, 'url' => url('admin-kurikulum/' . $kurikulum_id) ] 
             ];
@@ -104,22 +104,29 @@ class AdminController extends Controller
             $kurikulumData = Kurikulum::get();
             $view = 'admin/kurikulum';
             $page = [ 
-                [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+                [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
                 [ 'name' => 'Kurikulum', 'url' => url('admin-kurikulum') ], 
             ];
         }
 
         $data = [
             'title' => 'Kurikulum',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
+
+        $menuModel = new Menu();
+        $menuData = $menuModel->where('menu_slug', 'kurikulum')->first();
+        $menuData = $menuModel->getDetailMenu($menuData->menu_id);
 
         return
         view('templates/header', $data) . 
         view('templates/sidebar-admin', $data) . 
         view($view, [
             'kurikulum' => $kurikulumData,
+            'data' => $menuData,
+            'page' => 'admin-kurikulum',
         ]) . 
         view('templates/footbar-admin') .
         view('templates/footer');
@@ -128,15 +135,16 @@ class AdminController extends Controller
     public function kurikulum_tambah()
     {
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Kurikulum', 'url' => url('admin-kurikulum') ],
             [ 'name' => 'Tambah Kurikulum', 'url' => url('admin-tambah-kurikulum') ],
         ];
 
         $data = [
             'title' => 'Tambah Kurikulum',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         $kurikulumData = Kurikulum::orderBy('kurikulum_mulai', 'asc')->get();
@@ -154,7 +162,7 @@ class AdminController extends Controller
         $kurikulumData = Kurikulum::where('kurikulum_id', $kurikulum_id)->first();
 
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Kurikulum', 'url' => url('admin-kurikulum') ],
             [ 'name' => $kurikulumData->kurikulum_judul_ID, 'url' => url('admin-kurikulum/' . $kurikulum_id) ],
             [ 'name' => 'Edit', 'url' => url('admin-edit-kurikulum/' . $kurikulum_id) ],
@@ -162,8 +170,9 @@ class AdminController extends Controller
 
         $data = [
             'title' => 'Edit Kurikulum',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         return
@@ -179,14 +188,15 @@ class AdminController extends Controller
     public function matkul(Request $request)
     {
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
         ];
 
         $data = [
             'title' => 'Mata Kuliah',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         $k = $request->query('k', '');
@@ -224,15 +234,16 @@ class AdminController extends Controller
         $dosenData = Dosen::get();
 
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
             [ 'name' => $mkData->mk_mk_ID . ' (' . $mkData->mk_id . ')', 'url' => url('admin-mata-kuliah/' . $mkData->mk_id) ],
         ];
 
         $data = [
             'title' => 'Mata Kuliah',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         return
@@ -249,15 +260,16 @@ class AdminController extends Controller
     public function matkul_tambah()
     {
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
             [ 'name' => 'Tambah', 'url' => url('admin-tambah-matkul') ],
         ];
 
         $data = [
             'title' => 'Tambah Mata Kuliah',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         $kurikulumData = Kurikulum::get();
@@ -277,7 +289,7 @@ class AdminController extends Controller
         $mkData = MataKuliah::getDetailSelectedMk($mk_id);
 
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Mata Kuliah', 'url' => url('admin-mata-kuliah') ],
             [ 'name' => $mkData->mk_mk_ID . ' (' . $mkData->mk_id . ')', 'url' => url('admin-mata-kuliah/' . $mkData->mk_id) ],
             [ 'name' => 'Edit', 'url' => url('admin-edit-matkul/' . $mkData->mk_id) ],        
@@ -285,8 +297,9 @@ class AdminController extends Controller
 
         $data = [
             'title' => 'Edit Mata Kuliah',
-            'status' => '2',
+            'status' => 'akademik',
             'page' => $page,
+            'side' => Kategori::get(),
         ];
 
         $kurikulumData = Kurikulum::get();
@@ -572,7 +585,7 @@ class AdminController extends Controller
     public function dosen_fokus_riset()
     {
         $page = [
-            [ 'name' => 'Akademik', 'url' => url('admin-menu-akademik') ],
+            [ 'name' => 'Akademik', 'url' => url('admin-kategori-akademik') ],
             [ 'name' => 'Fokus Riset', 'url' => url('admin-fokus-riset') ],
         ];
 
@@ -675,6 +688,7 @@ class AdminController extends Controller
     public function berita()
     {
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Berita', 'url' => url('admin-berita') ],
         ];
 
@@ -700,6 +714,7 @@ class AdminController extends Controller
     public function berita_tambah()
     {
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Berita', 'url' => url('admin-berita') ],
             [ 'name' => 'Tambah', 'url' => url('admin-tambah-berita') ],
         ];
@@ -724,6 +739,7 @@ class AdminController extends Controller
         $beritaData = Berita::where('berita_id', $berita_id)->first();
 
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Berita', 'url' => url('admin-berita') ],
             [ 'name' => $beritaData->berita_judul_ID, 'url' => url('admin-berita/' . $beritaData->berita_judul_ID) ],
         ];
@@ -750,6 +766,7 @@ class AdminController extends Controller
         $beritaData = Berita::where('berita_id', $berita_id)->first();
 
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Berita', 'url' => url('admin-berita') ],
             [ 'name' => $beritaData->berita_judul_ID, 'url' => url('admin-berita/' . $beritaData->berita_id) ],
             [ 'name' => 'Edit', 'url' => url('admin-edit-berita/' . $beritaData->berita_judul_ID) ],
@@ -775,6 +792,7 @@ class AdminController extends Controller
     public function pengumuman()
     {
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
         ];
 
@@ -800,6 +818,7 @@ class AdminController extends Controller
     public function pengumuman_tambah()
     {
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
             [ 'name' => 'Tambah', 'url' => url('admin-tambah-pengumuman') ],
         ];
@@ -824,6 +843,7 @@ class AdminController extends Controller
         $pengumumanData = Pengumuman::where('pengumuman_id', $pengumuman_id)->first();
 
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
             [ 'name' => $pengumumanData->pengumuman_judul_ID, 'url' => url('admin-pengumuman/' . $pengumumanData->pengumuman_judul_ID) ],
         ];
@@ -850,6 +870,7 @@ class AdminController extends Controller
         $pengumumanData = Pengumuman::where('pengumuman_id', $pengumuman_id)->first();
 
         $page = [
+            [ 'name' => 'Informasi', 'url' => url('admin-kategori-informasi') ],
             [ 'name' => 'Pengumuman', 'url' => url('admin-pengumuman') ],
             [ 'name' => $pengumumanData->pengumuman_judul_ID, 'url' => url('admin-pengumuman/' . $pengumumanData->pengumuman_id) ],
             [ 'name' => 'Edit', 'url' => url('admin-edit-pengumuman/' . $pengumumanData->pengumuman_judul_ID) ],

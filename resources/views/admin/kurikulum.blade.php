@@ -1,8 +1,11 @@
 <div class="row m-0 p-0 w-100">
-    <div class="col-lg-12 m-0 p-0 text-clr1 mt-4 mt-lg-0">
+    <div class="col-lg-12 m-0 p-0 text-clr3 mt-4 mt-lg-0">
         <h3>Daftar Kurikulum</h3>
         @include('templates/session')
         <a href="{{ url('admin-tambah-kurikulum') }}" class="btn btn-outline-clr1 btn-sm">Tambah Kurikulum</a>
+        <hr>
+        @include('admin/templates-header')
+        <hr>
         @if($kurikulum->isNotEmpty())
         <div class="mt-3">
             @foreach($kurikulum as $x)

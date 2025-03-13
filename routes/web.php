@@ -44,11 +44,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('admin-dashboard', [AdminController::class, 'index']);
     Route::get('admin-kategori-{slug}', [AdminController::class, 'kategori']);
 
-    Route::get('admin-dependen-{slug}', [AdminController::class, 'update_menu']); 
-    Route::post('admin-update-menu-konten', [MenuController::class, 'update_konten']); 
-    Route::post('admin-update-menu-status', [MenuController::class, 'update_status']); 
-    Route::post('admin-update-menu-show', [MenuController::class, 'update_show']); 
-
+    // Independen
     Route::get('admin-kurikulum', [AdminController::class, 'kurikulum']);
     Route::get('admin-tambah-kurikulum', [AdminController::class, 'kurikulum_tambah']);
     Route::post('admin-simpan-kurikulum', [KurikulumController::class, 'add']);
@@ -75,7 +71,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('admin-tambah-dosen/step-3/{slug}', [AdminController::class, 'dosen_tambah_step3']);
     Route::post('admin-simpan-dosen/step-2', [DosenController::class, 'add_step2']);
     Route::post('admin-simpan-dosen/step-3', [DosenController::class, 'add_step3']);
-    Route::get('admin-fokus-riset', [AdminController::class, 'dosen_fokus_riset']);
+    Route::get('admin-fokus-riset-dosen', [AdminController::class, 'dosen_fokus_riset']);
     Route::post('admin-simpan-fr', [DosenController::class, 'fr_add']);
     Route::get('admin-hapus-fr/{slug}', [DosenController::class, 'fr_delete']);
     Route::get('admin-edit-dosen/{slug}', [AdminController::class, 'dosen_edit']);
@@ -113,4 +109,13 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('admin-update-pengumuman', [PengumumanController::class, 'update']);
     Route::get('admin-hapus-pengumuman/{slug}', [PengumumanController::class, 'delete']); 
 
+    // Dependen
+    Route::get('admin-{slug}', [AdminController::class, 'update_menu']); 
+    Route::post('admin-update-menu-konten', [MenuController::class, 'update_konten']); 
+    Route::post('admin-update-menu-status', [MenuController::class, 'update_status']); 
+    Route::post('admin-update-menu-show', [MenuController::class, 'update_show']); 
+    Route::post('admin-update-menu-gambar', [MenuController::class, 'update_gambar']); 
+
 });
+
+Route::get('/{slug}', [HomeController::class, 'menu']);

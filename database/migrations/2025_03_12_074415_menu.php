@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('menu_isi_EN')->nullable();
             $table->integer('menu_urutan');
             $table->integer('menu_status')->default(0); // tampilan navbar: 0 = biasa, 1 = bold, 2 = new, 3 = penting
-            $table->integer('menu_as'); // 0 = default (builder), 1 = default, 2 = tambahan (1), 3 = tambahan (1-M)
-            $table->integer('menu_relation')->default(0); // berlaku jika menu_as = 3: isinya adalah menu_id induknya
+            $table->integer('menu_as'); // 0 = default (builder), 1 = default (1), 2 = default (1-M), 3 = tambahan (1), 4 = tambahan (1-M)
+            $table->integer('menu_relation')->default(0); // berlaku jika menu_as = 2 atau 4: isinya adalah menu_id induknya
             $table->integer('menu_show')->nullable(); // 0 = tak ditampilkan, 1 = ditampilkan
             $table->timestamps();
         });
