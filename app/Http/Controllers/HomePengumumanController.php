@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pengumuman;
 
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\App;
 
 class HomePengumumanController extends Controller
 {
@@ -15,6 +17,8 @@ class HomePengumumanController extends Controller
             'title' => __('header.title.pengumuman'),
             'status_main' => 'informasi',
             'status' => 'pengumuman',
+            'menu_lain' => Kategori::getKategoriLocalDetail('informasi', App::getLocale()),
+            'nav' => Kategori::getKategoriLocal(1000, App::getLocale())
         ];
     
         $k = request()->query('k', '');
@@ -49,11 +53,13 @@ class HomePengumumanController extends Controller
             'title' => __('header.title.pengumuman'),
             'status_main' => 'informasi',
             'status' => 'pengumuman',
+            'menu_lain' => Kategori::getKategoriLocalDetail('informasi', App::getLocale()),
+            'nav' => Kategori::getKategoriLocal(1000, App::getLocale()),
             'pengumuman_lain' => Pengumuman::getPengumuman(5),
         ];
 
         
-        $pengumumanData = Pengumuman::getDetailPengumuman($pengumuman_slug);
+        $pengumumanData = Pengumuman::getDetailPengumuman($pengumuman_slug, App::getLocale());
     
         return 
             view('templates/header', $data) . 

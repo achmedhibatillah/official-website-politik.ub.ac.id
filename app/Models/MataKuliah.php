@@ -62,4 +62,35 @@ class MataKuliah extends Model
 
         return $mataKuliah;
     }
+
+    public static function getAllMataKuliahLocalized($lang)
+    {
+        $name_field = 'mk_mk_' . strtoupper($lang);
+        $desc_field = 'mk_deskripsi_' . strtoupper($lang);
+
+        return self::select([
+            'mk_id',
+            $name_field . ' as mk_name',
+            $desc_field . ' as mk_deskripsi',
+            'mk_semester',
+            'mk_sks',
+        ])->get();
+    }
+
+    /**
+     * Mengembalikan detail mata kuliah berdasarkan ID dalam bahasa yang dipilih.
+     */
+    public static function getDetailMataKuliahLocalized($lang, $mk_id)
+    {
+        $name_field = 'mk_mk_' . strtoupper($lang);
+        $desc_field = 'mk_deskripsi_' . strtoupper($lang);
+
+        return self::select([
+            'mk_id',
+            $name_field . ' as mk_name',
+            $desc_field . ' as mk_deskripsi',
+            'mk_semester',
+            'mk_sks',
+        ])->where('mk_id', $mk_id)->first();
+    }
 }

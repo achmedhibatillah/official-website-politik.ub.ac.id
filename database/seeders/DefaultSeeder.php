@@ -26,6 +26,7 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fas fa-school"></i>',
                 'kategori_urutan' => 1,
                 'kategori_status' => 1,
+                'kategori_show' => 1,
             ],
             [ // Akademik
                 'kategori_id' => 2, 
@@ -35,6 +36,7 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fas fa-graduation-cap"></i>',
                 'kategori_urutan' => 2,
                 'kategori_status' => 1,
+                'kategori_show' => 1,
             ], 
             [ // Kemahasiswaan & Alumni
                 'kategori_id' => 3, 
@@ -44,6 +46,7 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fa-solid fa-user-tie"></i>',
                 'kategori_urutan' => 3,
                 'kategori_status' => 1,
+                'kategori_show' => 1,
             ],
             [ // Penelitian & Pengabdian
                 'kategori_id' => 4, 
@@ -53,7 +56,8 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fas fa-atom"></i>',
                 'kategori_urutan' => 4,
                 'kategori_status' => 1,
-            ],
+                'kategori_show' => 1,
+            ], 
             [ // Jaminan Mutu
                 'kategori_id' => 5, 
                 'kategori_judul_ID' => 'Jaminan Mutu', 
@@ -62,6 +66,7 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fas fa-medal"></i>',
                 'kategori_urutan' => 5,
                 'kategori_status' => 1,
+                'kategori_show' => 1,
             ],
             [ // Berita
                 'kategori_id' => 6, 
@@ -71,6 +76,7 @@ class DefaultSeeder extends Seeder
                 'kategori_icon' => '<i class="fa-solid fa-newspaper"></i>',
                 'kategori_urutan' => 6,
                 'kategori_status' => 1,
+                'kategori_show' => 1,
             ],
             [ // Kontak
                 'kategori_id' => 7, 
@@ -79,7 +85,8 @@ class DefaultSeeder extends Seeder
                 'kategori_slug' => 'kontak',
                 'kategori_icon' => '<i class="fa-solid fa-phone"></i>',
                 'kategori_urutan' => 7,
-                'kategori_status' => 1,
+                'kategori_status' => 2,
+                'kategori_show' => 1,
             ],
         ]);
 

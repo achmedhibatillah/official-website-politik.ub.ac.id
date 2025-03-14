@@ -50,7 +50,7 @@ class Dosen extends Model
     public static function getDetailDosen($dosen_id)
     {
         return self::with(['fr', 'mk'])->where('dosen_id', $dosen_id)->first();
-    }
+    } 
     
     public static function getDetailSelectedDosen($dosen_id)
     {
@@ -75,5 +75,62 @@ class Dosen extends Model
     
         return $dosen;
     }
-      
+ 
+        /**
+     * Mengembalikan daftar semua dosen dengan data yang sudah difilter berdasarkan bahasa
+     */
+    public static function getAllDosenLocalized($lang)
+    {
+        $desc_field = 'dosen_deskripsi_' . strtoupper($lang);
+        $konsentrasi_field = 'dosen_konsentrasi_' . strtoupper($lang);
+        $keahlian_field = 'dosen_keahlian_' . strtoupper($lang);
+
+        return self::select([
+            'dosen_id',
+            'dosen_nama',
+            'dosen_nomor',
+            'dosen_slug',
+            'dosen_email',
+            'dosen_foto',
+            'dosen_scholar',
+            'dosen_orcid',
+            'dosen_scopus',
+            'dosen_sinta',
+            'dosen_s1',
+            'dosen_s2',
+            'dosen_s3',
+            $desc_field . ' as dosen_deskripsi',
+            $konsentrasi_field . ' as dosen_konsentrasi',
+            $keahlian_field . ' as dosen_keahlian'
+        ])->get();
+    }
+
+    /**
+     * Mengembalikan detail dosen berdasarkan ID dengan data yang sudah difilter berdasarkan bahasa
+     */
+    public static function getDetailDosenLocalized($lang, $dosen_id)
+    {
+        $desc_field = 'dosen_deskripsi_' . strtoupper($lang);
+        $konsentrasi_field = 'dosen_konsentrasi_' . strtoupper($lang);
+        $keahlian_field = 'dosen_keahlian_' . strtoupper($lang);
+
+        return self::select([
+            'dosen_id',
+            'dosen_nama',
+            'dosen_nomor',
+            'dosen_slug',
+            'dosen_email',
+            'dosen_foto',
+            'dosen_scholar',
+            'dosen_orcid',
+            'dosen_scopus',
+            'dosen_sinta',
+            'dosen_s1',
+            'dosen_s2',
+            'dosen_s3',
+            $desc_field . ' as dosen_deskripsi',
+            $konsentrasi_field . ' as dosen_konsentrasi',
+            $keahlian_field . ' as dosen_keahlian'
+        ])->where('dosen_id', $dosen_id)->first();
+    }
 }

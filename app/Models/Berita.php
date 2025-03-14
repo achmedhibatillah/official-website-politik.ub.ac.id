@@ -52,7 +52,7 @@ class Berita extends Model
         $berita = self::where('berita_slug', $berita_slug)->first();
         return $berita ? self::formatBerita($berita, $locale) : null;
     }
-
+ 
     /**
      * Format berita sesuai lokal dan kembalikan sebagai object
      */

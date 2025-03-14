@@ -36,12 +36,12 @@
     <div class="col-md-6 col-lg-8 m-0 p-0 d-flex justify-content-center">
         <div class="w-100 ms-0 ms-md-5 mt-5 mt-md-0">
             <h3 class="fw-light text-center text-md-start">Lokasi</h3>
-            <div class="border-clr1 w-100 iframe-container">
+            <div class="border-clr3 w-100 iframe-container">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31612.695907715628!2d112.59186971081301!3d-7.938129639722973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827bc35467e1%3A0x364f4b5e8098aa2e!2sFISIP%20UNIVERSITAS%20BRAWIJAYA!5e0!3m2!1sen!2sid!4v1741352728820!5m2!1sen!2sid" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="d-flex mt-3 fw-light">
                 <h5 class="m-0"><i class="fa-solid fa-location-dot me-2"></i></h5>
-                <h5 class="m-0 fw-light">Fakultas Ilmu Sosial dan Ilmu Politik, Jalan Socio Politica, Lowokwaru, Kota Malang</h5>
+                <h5 class="m-0 fw-light">@lang('home.lokasi')</h5>
             </div>
         </div>
     </div>

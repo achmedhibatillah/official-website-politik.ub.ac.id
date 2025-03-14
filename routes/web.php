@@ -23,6 +23,8 @@ use App\Http\Middleware\GuestMidlleware;
 use Illuminate\Auth\Middleware\Authenticate;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('locale/{lang}', [HomeController::class, 'setLocale']);
+
 Route::get('s', function() { return response()->json(session()->all()); });
 Route::get('d', [LogicController::class, 'd']);
 

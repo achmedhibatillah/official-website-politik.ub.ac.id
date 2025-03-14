@@ -12,10 +12,9 @@
                     <div class="border-sec-bottom">
                         <h5 class="lh-1">{{ $title_main }}</h5>
                         <div class="mt-4">
-                            <a href="{{ url('berita') }}" class="side-home {{ ($status == 'berita') ? 'side-active' : '' }} bg-clr5 hover fsz-10 p-2 td-none text-clr3 d-block">Berita Program Studi</a>
-                            <a href="{{ url('pengumuman') }}" class="side-home {{ ($status == 'pengumuman') ? 'side-active' : '' }} bg-clr5 hover fsz-10 p-2 td-none text-clr3 d-block">Pengumuman</a>
-                            <a href="{{ url('kegiatan') }}" class="side-home {{ ($status == 'kegiatan') ? 'side-active' : '' }} bg-clr5 hover fsz-10 p-2 td-none text-clr3 d-block">Kegiatan</a>
-                            <a href="{{ url('galeri') }}" class="side-home {{ ($status == 'galeri') ? 'side-active' : '' }} bg-clr5 hover fsz-10 p-2 td-none text-clr3 d-block">Galeri</a>
+                            @foreach($menu_lain->menu as $x)
+                                <a href="{{ url($x->menu_slug) }}" class="side-home {{ ($status == $x->menu_slug) ? 'side-active' : '' }} bg-clr5 hover fsz-10 p-2 td-none text-clr3 d-block">{{ $x->menu_judul }}</a>
+                            @endforeach
                         </div> 
                     </div>
                     @if(isset($berita_lain))

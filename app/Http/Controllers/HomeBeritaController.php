@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Berita;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\App;
 
 class HomeBeritaController extends Controller
 {
@@ -15,6 +17,8 @@ class HomeBeritaController extends Controller
             'title' => __('header.title.berita_prodi'),
             'status_main' => 'informasi',
             'status' => 'berita',
+            'menu_lain' => Kategori::getKategoriLocalDetail('informasi', App::getLocale()),
+            'nav' => Kategori::getKategoriLocal(1000, App::getLocale())
         ];
     
         $k = request()->query('k', '');
@@ -25,9 +29,9 @@ class HomeBeritaController extends Controller
                 ->paginate(10)
                 ->through(fn($item) => Berita::formatBerita($item));
         } else {
-            $beritaData = Berita::getBerita(10);
+            $beritaData = Berita::getBerita(10, App::getLocale());
         }        
-    
+     
         return 
             view('templates/header', $data) . 
             view('templates/navbar-home', $data) .
@@ -49,11 +53,13 @@ class HomeBeritaController extends Controller
             'title' => __('header.title.berita_prodi'),
             'status_main' => 'informasi',
             'status' => 'berita',
-            'berita_lain' => Berita::getBerita(5),
+            'menu_lain' => Kategori::getKategoriLocalDetail('informasi', App::getLocale()),
+            'berita_lain' => Berita::getBerita(5, App::getLocale()),
+            'nav' => Kategori::getKategoriLocal(1000, App::getLocale())
         ];
 
         
-        $beritaData = Berita::getDetailBerita($berita_slug);
+        $beritaData = Berita::getDetailBerita($berita_slug, App::getLocale());
     
         return 
             view('templates/header', $data) . 

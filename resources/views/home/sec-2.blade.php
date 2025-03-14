@@ -1,7 +1,7 @@
 <div class="row m-0 p-0 w-100 py-5">
     <div class="col-md-4 m-0 p-0 d-flex justify-content-center align-items-center">
         <div class="position-relative text-clr1">
-            <h5 class="text-center fw-light">Jargon Ilmu Politik</h5>
+            <h5 class="text-center fw-light">@lang('home.jargon_ilmu_politik')</h5>
             <hr>
             <div class="d-flex">
             <i class="fas fa-bullhorn fsz-40"></i>
@@ -25,9 +25,9 @@
                 </div>
                 <div class="col-6 col-md-8 p-3 text-clr5 d-flex align-items-center">
                     <div class="">
-                        <p class="mb-2 lh-1">Program Studi Ilmu Politik Universitas Brawijaya memperoleh:</p>
+                        <p class="mb-2 lh-1">@lang('home.memperoleh_akreditasi'):</p>
                         <h3 class="m-0 lh-1 fw-800">Akreditasi Unggul</h3>
-                        <a href="{{ url('') }}" class="btn btn-outline-clr5 btn-sm mt-3">Selengkapnya</a>
+                        <a href="{{ url('') }}" class="btn btn-outline-clr5 btn-sm mt-3">@lang('home.selengkapnya')</a>
                     </div>
                 </div>
             </div>
